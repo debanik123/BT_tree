@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <ReactiveFallback>
+            <Condition ID="areYouRested"/>
+            <Timeout msec="8">
+                <Action ID="sleep"/>
+            </Timeout>
+        </ReactiveFallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Condition ID="areYouRested"/>
+        <Action ID="sleep"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
