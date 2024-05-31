@@ -3,19 +3,71 @@
     <!-- ////////// -->
 
     <TreeNodesModel>
-        <Action ID="ComputePathThroughPoses"/>
+        <Action ID="Wait"/>
+        <Action ID="Spin"/>
+        <Action ID="BackUp"/>
+        <Action ID="DriveOnHeading"/>
+        <Action ID="AssistedTeleop"/>
         <Action ID="ComputePathToPose"/>
-        <Action ID="ControllerSelector"/>
         <Action ID="FollowPath"/>
-        <Decorator ID="GoalUpdater"/>
-        <Control ID="PipelineSequence"/>
+        <Action ID="NavigateToPose"/>
+        <Action ID="ClearEntireCostmap"/>
+        <Action ID="ClearCostmapExceptRegion"/>
+        <Action ID="ClearCostmapAroundRobot"/>
+        <Action ID="ReinitializeGlobalLocalization"/>
+        <Action ID="TruncatePath"/>
+        <Action ID="TruncatePathLocal"/>
         <Action ID="PlannerSelector"/>
+        <Action ID="ControllerSelector"/>
+        <Action ID="SmootherSelector"/>
+        <Action ID="GoalCheckerSelector"/>
+        <Action ID="ProgressCheckerSelector"/>
+        <Action ID="NavigateThroughPoses"/>
+        <Action ID="ComputePathThroughPoses"/>
+        <Action ID="ComputeCoveragePath"/>
+        <Action ID="CancelCoverage"/>
+        <Action ID="RemovePassedGoals"/>
+        <Action ID="CancelControl"/>
+        <Action ID="CancelBackUp"/>
+        <Action ID="CancelSpin"/>
+        <Action ID="CancelWait"/>
+        <Action ID="CancelDriveOnHeading"/>
+        <Action ID="CancelAssistedTeleop"/>
+        <Action ID="SmoothPath"/>
+
+
+        <Condition ID="GoalReached"/>
+        <Condition ID="TransformAvailable"/>
+        <Condition ID="DistanceTraveled"/>
+        <Condition ID="GoalUpdated"/>
+        <Condition ID="GloballyUpdatedGoal"/>
+        <Condition ID="InitialPoseReceived"/>
+        <Condition ID="IsStuck"/>
+        <Condition ID="TimeExpired"/>
+        <Condition ID="IsBatteryLow"/>
+        <Condition ID="IsPathValid"/>
+        <Condition ID="PathExpiringTimer"/>
+        <Condition ID="AreErrorCodesPresent"/>
+        <Condition ID="WouldAControllerRecoveryHelp"/>
+        <Condition ID="WouldAPlannerRecoveryHelp"/>
+        <Condition ID="WouldASmootherRecoveryHelp"/>
+        <Condition ID="IsBatteryCharging"/>
+        
+        <Control ID="PipelineSequence"/>
+        <Control ID="RoundRobin"/>
+        <Control ID="RecoveryNode"/>
+
+
         <Decorator ID="RateController">
             <input_port default="1.0" name="hz">loop frequency</input_port>
         </Decorator>
-        <Control ID="RecoveryNode"/>
-        <Control ID="RoundRobin"/>
-        <Action ID="TruncatePath"/>
+        <Decorator ID="DistanceController"/>
+        <Decorator ID="SpeedController"/>
+        <Decorator ID="GoalUpdater"/>
+        <Decorator ID="PathLongerOnApproach"/>
+        <Decorator ID="SingleTrigger"/>
+        
+
     </TreeNodesModel>
     <!-- ////////// -->
 </root>
