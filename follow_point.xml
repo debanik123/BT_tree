@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Control ID="PipelineSequence" name="NavigateWithReplanning">
+            <Action ID="ControllerSelector"/>
+            <Action ID="PlannerSelector"/>
+            <Decorator ID="RateController" hz="1.0">
+                <Sequence>
+                    <Decorator ID="GoalUpdater">
+                        <Action ID="ComputePathToPose"/>
+                    </Decorator>
+                    <Action ID="TruncatePath"/>
+                </Sequence>
+            </Decorator>
+            <KeepRunningUntilFailure>
+                <Action ID="FollowPath"/>
+            </KeepRunningUntilFailure>
+        </Control>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="ComputePathThroughPoses"/>
+        <Action ID="ComputePathToPose"/>
+        <Action ID="ControllerSelector"/>
+        <Action ID="FollowPath"/>
+        <Decorator ID="GoalUpdater"/>
+        <Control ID="PipelineSequence"/>
+        <Action ID="PlannerSelector"/>
+        <Decorator ID="RateController">
+            <input_port default="1.0" name="hz">loop frequency</input_port>
+        </Decorator>
+        <Control ID="RecoveryNode"/>
+        <Control ID="RoundRobin"/>
+        <Action ID="TruncatePath"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
