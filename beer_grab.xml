@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Action ID="OpenFridge"/>
+            <Fallback>
+                <Action ID="GrabBeer"/>
+                <ForceFailure>
+                    <Action ID="CloseFridge"/>
+                </ForceFailure>
+            </Fallback>
+            <Action ID="CloseFridge"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="CloseFridge"/>
+        <Action ID="GrabBeer"/>
+        <Action ID="OpenFridge"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>

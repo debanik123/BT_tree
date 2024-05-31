@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Fallback>
+                <Condition ID="IsDoorOpen"/>
+                <Action ID="OpenDoor"/>
+                <Sequence>
+                    <Condition ID="Havekey"/>
+                    <Action ID="UnlockDoor"/>
+                    <Action ID="OpenDoor"/>
+                </Sequence>
+                <Action ID="SmashDoor"/>
+            </Fallback>
+            <Action ID="EnterRoom"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="EnterRoom"/>
+        <Condition ID="Havekey"/>
+        <Condition ID="IsDoorOpen"/>
+        <Action ID="OpenDoor"/>
+        <Action ID="SmashDoor"/>
+        <Action ID="UnlockDoor"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
