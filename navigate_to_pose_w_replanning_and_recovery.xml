@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Control ID="RecoveryNode" name="NavigateRecovery" number_of_retries="6">
+            <Control ID="PipelineSequence" name="NavigateWithReplanning">
+                <Action ID="ControllerSelector" name="FollowPath"/>
+                <Action ID="PlannerSelector" name="GridBased"/>
+                <Decorator ID="RateController" hz="1.0">
+                    <Control ID="RecoveryNode" number_of_retries="2">
+                        <Action ID="ComputePathToPose"/>
+                        <Sequence>
+                            <Condition ID="WouldAControllerRecoveryHelp"/>
+                            <Action ID="ClearEntireCostmap" name="ClearGlobalCostmap-Subtree"/>
+                        </Sequence>
+                    </Control>
+                </Decorator>
+                <Control ID="RecoveryNode" number_of_retries="6">
+                    <Action ID="FollowPath"/>
+                    <Sequence>
+                        <Condition ID="WouldAControllerRecoveryHelp"/>
+                        <Action ID="ClearEntireCostmap" name="ClearLocalCostmap"/>
+                    </Sequence>
+                </Control>
+            </Control>
+            <ReactiveFallback name="RecoveryFallback">
+                <Condition ID="GoalUpdated"/>
+                <Control ID="RoundRobin" name="RecoveryActions">
+                    <Sequence name="ClearingActions">
+                        <Action ID="ClearEntireCostmap" name="ClearLocalCostmap-Subtree"/>
+                        <Action ID="ClearEntireCostmap" name="ClearGlobalCostmap-Subtree"/>
+                    </Sequence>
+                    <Action ID="Spin" spin_dist="1.57"/>
+                    <Action ID="Wait" wait_duration="5"/>
+                    <Action ID="BackUp" backup_dist="0.30" backup_speed="0.05"/>
+                </Control>
+            </ReactiveFallback>
+        </Control>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Condition ID="AreErrorCodesPresent"/>
+        <Action ID="AssistedTeleop"/>
+        <Action ID="BackUp">
+            <input_port default="0.30" name="backup_dist"/>
+            <input_port default="0.05" name="backup_speed"/>
+        </Action>
+        <Action ID="CancelAssistedTeleop"/>
+        <Action ID="CancelBackUp"/>
+        <Action ID="CancelControl"/>
+        <Action ID="CancelCoverage"/>
+        <Action ID="CancelDriveOnHeading"/>
+        <Action ID="CancelSpin"/>
+        <Action ID="CancelWait"/>
+        <Action ID="ClearCostmapAroundRobot"/>
+        <Action ID="ClearCostmapExceptRegion"/>
+        <Action ID="ClearEntireCostmap"/>
+        <Action ID="ComputeCoveragePath"/>
+        <Action ID="ComputePathThroughPoses"/>
+        <Action ID="ComputePathToPose"/>
+        <Action ID="ControllerSelector"/>
+        <Decorator ID="DistanceController"/>
+        <Condition ID="DistanceTraveled"/>
+        <Action ID="DriveOnHeading"/>
+        <Action ID="FollowPath"/>
+        <Condition ID="GloballyUpdatedGoal"/>
+        <Action ID="GoalCheckerSelector"/>
+        <Condition ID="GoalReached"/>
+        <Condition ID="GoalUpdated"/>
+        <Decorator ID="GoalUpdater"/>
+        <Condition ID="InitialPoseReceived"/>
+        <Condition ID="IsBatteryCharging"/>
+        <Condition ID="IsBatteryLow"/>
+        <Condition ID="IsPathValid"/>
+        <Condition ID="IsStuck"/>
+        <Action ID="NavigateThroughPoses"/>
+        <Action ID="NavigateToPose"/>
+        <Condition ID="PathExpiringTimer">
+            <input_port default="10" name="seconds"/>
+        </Condition>
+        <Decorator ID="PathLongerOnApproach"/>
+        <Control ID="PipelineSequence"/>
+        <Action ID="PlannerSelector"/>
+        <Action ID="ProgressCheckerSelector"/>
+        <Decorator ID="RateController">
+            <input_port default="1.0" name="hz">loop frequency</input_port>
+        </Decorator>
+        <Control ID="RecoveryNode">
+            <input_port default="6" name="number_of_retries"/>
+        </Control>
+        <Action ID="ReinitializeGlobalLocalization"/>
+        <Action ID="RemovePassedGoals"/>
+        <Control ID="RoundRobin"/>
+        <Decorator ID="SingleTrigger"/>
+        <Action ID="SmoothPath"/>
+        <Action ID="SmootherSelector"/>
+        <Decorator ID="SpeedController"/>
+        <Action ID="Spin">
+            <input_port default="1.57" name="spin_dist"/>
+        </Action>
+        <Condition ID="TimeExpired"/>
+        <Condition ID="TransformAvailable"/>
+        <Action ID="TruncatePath"/>
+        <Action ID="TruncatePathLocal"/>
+        <Action ID="Wait">
+            <input_port default="5" name="wait_duration"/>
+        </Action>
+        <Condition ID="WouldAControllerRecoveryHelp"/>
+        <Condition ID="WouldAPlannerRecoveryHelp"/>
+        <Condition ID="WouldASmootherRecoveryHelp"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
