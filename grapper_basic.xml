@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Action ID="speak"/>
+            <Action ID="Open_Gripper"/>
+            <Action ID="Approach_Object"/>
+            <Action ID="closeGripper"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="Approach_Object"/>
+        <Action ID="Open_Gripper"/>
+        <Action ID="closeGripper"/>
+        <Action ID="speak"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <ReactiveSequence>
+            <Condition ID="BatteryOK"/>
+            <Sequence>
+                <Action ID="saySomething"/>
+                <Action ID="Move_Base"/>
+                <Action ID="saySomething"/>
+            </Sequence>
+        </ReactiveSequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Condition ID="BatteryOK"/>
+        <Action ID="Move_Base"/>
+        <Action ID="saySomething"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
