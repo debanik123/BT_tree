@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Action ID="RemovePassedGoals"/>
+            <Action ID="ComputePathThroughPoses"/>
+            <Action ID="FollowPath"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Condition ID="AreErrorCodesPresent"/>
+        <Action ID="AssistedTeleop"/>
+        <Action ID="BackUp"/>
+        <Action ID="CancelAssistedTeleop"/>
+        <Action ID="CancelBackUp"/>
+        <Action ID="CancelControl"/>
+        <Action ID="CancelCoverage"/>
+        <Action ID="CancelDriveOnHeading"/>
+        <Action ID="CancelSpin"/>
+        <Action ID="CancelWait"/>
+        <Action ID="ClearCostmapAroundRobot"/>
+        <Action ID="ClearCostmapExceptRegion"/>
+        <Action ID="ClearEntireCostmap"/>
+        <Action ID="ComputeCoveragePath"/>
+        <Action ID="ComputePathThroughPoses"/>
+        <Action ID="ComputePathToPose"/>
+        <Action ID="ControllerSelector"/>
+        <Decorator ID="DistanceController"/>
+        <Condition ID="DistanceTraveled"/>
+        <Action ID="DriveOnHeading"/>
+        <Action ID="FollowPath"/>
+        <Condition ID="GloballyUpdatedGoal"/>
+        <Action ID="GoalCheckerSelector"/>
+        <Condition ID="GoalReached"/>
+        <Condition ID="GoalUpdated"/>
+        <Decorator ID="GoalUpdater"/>
+        <Condition ID="InitialPoseReceived"/>
+        <Condition ID="IsBatteryCharging"/>
+        <Condition ID="IsBatteryLow"/>
+        <Condition ID="IsPathValid"/>
+        <Condition ID="IsStuck"/>
+        <Action ID="NavigateThroughPoses"/>
+        <Action ID="NavigateToPose"/>
+        <Condition ID="PathExpiringTimer"/>
+        <Decorator ID="PathLongerOnApproach"/>
+        <Control ID="PipelineSequence"/>
+        <Action ID="PlannerSelector"/>
+        <Action ID="ProgressCheckerSelector"/>
+        <Decorator ID="RateController">
+            <input_port default="1.0" name="hz">loop frequency</input_port>
+        </Decorator>
+        <Control ID="RecoveryNode"/>
+        <Action ID="ReinitializeGlobalLocalization"/>
+        <Action ID="RemovePassedGoals"/>
+        <Control ID="RoundRobin"/>
+        <Decorator ID="SingleTrigger"/>
+        <Action ID="SmoothPath"/>
+        <Action ID="SmootherSelector"/>
+        <Decorator ID="SpeedController"/>
+        <Action ID="Spin"/>
+        <Condition ID="TimeExpired"/>
+        <Condition ID="TransformAvailable"/>
+        <Action ID="TruncatePath"/>
+        <Action ID="TruncatePathLocal"/>
+        <Action ID="Wait"/>
+        <Condition ID="WouldAControllerRecoveryHelp"/>
+        <Condition ID="WouldAPlannerRecoveryHelp"/>
+        <Condition ID="WouldASmootherRecoveryHelp"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
