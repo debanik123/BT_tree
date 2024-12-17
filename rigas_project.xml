@@ -18,6 +18,7 @@
                     <Action ID="find_mid_point"/>
                     <Action ID="go_mid_point"/>
                     <Action ID="collision_monitor_deactivation"/>
+                    <Action ID="cylinder_body_seg_param"/>
                 </Sequence>
             </RetryUntilSuccessful>
             <Sequence>
@@ -48,6 +49,7 @@
                     <Action ID="collision_monitor_deactivation"/>
                     <Action ID="go_mid_point"/>
                     <Sequence>
+                        <Action ID="cy_frame_seg_param_set"/>
                         <Action ID="generate_drop_points"/>
                         <Action ID="go_to_Drop_pose"/>
                         <RetryUntilSuccessful num_attempts="2">
@@ -134,6 +136,8 @@
         <Action ID="collision_monitor_activate"/>
         <Action ID="collision_monitor_deactivation"/>
         <Action ID="cy_frame_seg_param_set"/>
+        <Action ID="cylinder_body_seg_param"/>
+        <Action ID="cylinder_cluste_detection"/>
         <Action ID="drop_cylinder"/>
         <Action ID="execute_cy_cluster_vector"/>
         <Action ID="find_cy_clusters"/>
