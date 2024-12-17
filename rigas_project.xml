@@ -3,6 +3,13 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <Sequence>
+            <Sequence>
+                <Action ID="call_from_fms" name="go_pick_cylinder"/>
+                <Inverter>
+                    <Condition ID="IsBatteryLow"/>
+                </Inverter>
+                <Action ID="go_to_fms_rq_wp"/>
+            </Sequence>
             <RetryUntilSuccessful num_attempts="1">
                 <Sequence>
                     <Action ID="cy_frame_seg_param_set"/>
@@ -121,6 +128,7 @@
         <Condition ID="WouldAPlannerRecoveryHelp"/>
         <Condition ID="WouldASmootherRecoveryHelp"/>
         <Action ID="call_fms"/>
+        <Action ID="call_from_fms"/>
         <Action ID="call_picker"/>
         <Condition ID="check_gripper_open_close"/>
         <Action ID="collision_monitor_activate"/>
@@ -133,6 +141,7 @@
         <Action ID="generate_drop_points"/>
         <Action ID="go_mid_point"/>
         <Action ID="go_to_Drop_pose"/>
+        <Action ID="go_to_fms_rq_wp"/>
         <Action ID="go_to_pick_point"/>
         <Action ID="go_to_pre_point"/>
         <Action ID="goal_point_accuracy_xy_decrease"/>
