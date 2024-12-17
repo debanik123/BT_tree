@@ -29,8 +29,35 @@
                 <Action ID="resverse_false"/>
                 <Action ID="collision_monitor_activate"/>
                 <Action ID="speed_set"/>
-                <Action ID="go_to_Drop_pose"/>
+                <Action ID="goal_point_accuracy_xy_decrease"/>
+                <Action ID="inform_fms"/>
             </Sequence>
+            <RetryUntilSuccessful num_attempts="1">
+                <Sequence>
+                    <Action ID="cy_frame_seg_param_set"/>
+                    <Action ID="goal_point_xy_accuracy_increase"/>
+                    <Action ID="speed_set"/>
+                    <Action ID="find_mid_point"/>
+                    <Action ID="collision_monitor_deactivation"/>
+                    <Action ID="go_mid_point"/>
+                    <Sequence>
+                        <Action ID="generate_drop_points"/>
+                        <Action ID="go_to_Drop_pose"/>
+                        <RetryUntilSuccessful num_attempts="2">
+                            <Action ID="precision_landing"/>
+                        </RetryUntilSuccessful>
+                        <Action ID="drop_cylinder"/>
+                        <Action ID="reverse_active"/>
+                        <Action ID="go_to_pre_point"/>
+                        <Action ID="resverse_false"/>
+                        <Action ID="collision_monitor_activate"/>
+                        <Action ID="speed_set"/>
+                        <Action ID="goal_point_accuracy_xy_decrease"/>
+                        <Action ID="go_to_Drop_pose"/>
+                        <Action ID="inform_fms"/>
+                    </Sequence>
+                </Sequence>
+            </RetryUntilSuccessful>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -99,14 +126,18 @@
         <Action ID="collision_monitor_activate"/>
         <Action ID="collision_monitor_deactivation"/>
         <Action ID="cy_frame_seg_param_set"/>
+        <Action ID="drop_cylinder"/>
         <Action ID="execute_cy_cluster_vector"/>
         <Action ID="find_cy_clusters"/>
         <Action ID="find_mid_point"/>
+        <Action ID="generate_drop_points"/>
         <Action ID="go_mid_point"/>
         <Action ID="go_to_Drop_pose"/>
         <Action ID="go_to_pick_point"/>
         <Action ID="go_to_pre_point"/>
+        <Action ID="goal_point_accuracy_xy_decrease"/>
         <Action ID="goal_point_xy_accuracy_increase"/>
+        <Action ID="inform_fms"/>
         <Action ID="open_gripper"/>
         <Action ID="pick_cylinder"/>
         <Action ID="precision_landing"/>
