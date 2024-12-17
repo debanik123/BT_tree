@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <RetryUntilSuccessful num_attempts="1">
+                <Sequence>
+                    <Action ID="cy_frame_seg_param_set"/>
+                    <Action ID="goal_point_xy_accuracy_increase"/>
+                    <Action ID="speed_set"/>
+                    <Action ID="find_mid_point"/>
+                    <Action ID="go_mid_point"/>
+                    <Action ID="collision_monitor_deactivation"/>
+                </Sequence>
+            </RetryUntilSuccessful>
+            <Sequence>
+                <Action ID="find_cy_clusters"/>
+                <Action ID="go_to_pick_point"/>
+                <RetryUntilSuccessful num_attempts="2">
+                    <Action ID="precision_landing"/>
+                </RetryUntilSuccessful>
+                <Fallback>
+                    <Condition ID="check_gripper_open_close"/>
+                    <Action ID="open_gripper"/>
+                </Fallback>
+                <Action ID="pick_cylinder"/>
+                <Action ID="reverse_active"/>
+                <Action ID="go_to_pre_point"/>
+                <Action ID="resverse_false"/>
+                <Action ID="collision_monitor_activate"/>
+                <Action ID="speed_set"/>
+                <Action ID="go_to_Drop_pose"/>
+            </Sequence>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Condition ID="AreErrorCodesPresent"/>
+        <Action ID="AssistedTeleop"/>
+        <Action ID="BackUp"/>
+        <Action ID="CancelAssistedTeleop"/>
+        <Action ID="CancelBackUp"/>
+        <Action ID="CancelControl"/>
+        <Action ID="CancelCoverage"/>
+        <Action ID="CancelDriveOnHeading"/>
+        <Action ID="CancelSpin"/>
+        <Action ID="CancelWait"/>
+        <Action ID="ClearCostmapAroundRobot"/>
+        <Action ID="ClearCostmapExceptRegion"/>
+        <Action ID="ClearEntireCostmap"/>
+        <Action ID="ComputeCoveragePath"/>
+        <Action ID="ComputePathThroughPoses"/>
+        <Action ID="ComputePathToPose"/>
+        <Action ID="ControllerSelector"/>
+        <Decorator ID="DistanceController"/>
+        <Condition ID="DistanceTraveled"/>
+        <Action ID="DriveOnHeading"/>
+        <Action ID="FollowPath"/>
+        <Condition ID="GloballyUpdatedGoal"/>
+        <Action ID="GoalCheckerSelector"/>
+        <Condition ID="GoalReached"/>
+        <Condition ID="GoalUpdated"/>
+        <Decorator ID="GoalUpdater"/>
+        <Condition ID="InitialPoseReceived"/>
+        <Condition ID="IsBatteryCharging"/>
+        <Condition ID="IsBatteryLow"/>
+        <Condition ID="IsPathValid"/>
+        <Condition ID="IsStuck"/>
+        <Action ID="NavigateThroughPoses"/>
+        <Action ID="NavigateToPose"/>
+        <Condition ID="PathExpiringTimer"/>
+        <Decorator ID="PathLongerOnApproach"/>
+        <Control ID="PipelineSequence"/>
+        <Action ID="PlannerSelector"/>
+        <Action ID="ProgressCheckerSelector"/>
+        <Decorator ID="RateController">
+            <input_port default="1.0" name="hz">loop frequency</input_port>
+        </Decorator>
+        <Control ID="RecoveryNode"/>
+        <Action ID="ReinitializeGlobalLocalization"/>
+        <Action ID="RemovePassedGoals"/>
+        <Control ID="RoundRobin"/>
+        <Decorator ID="SingleTrigger"/>
+        <Action ID="SmoothPath"/>
+        <Action ID="SmootherSelector"/>
+        <Decorator ID="SpeedController"/>
+        <Action ID="Spin"/>
+        <Condition ID="TimeExpired"/>
+        <Condition ID="TransformAvailable"/>
+        <Action ID="TruncatePath"/>
+        <Action ID="TruncatePathLocal"/>
+        <Action ID="Wait"/>
+        <Condition ID="WouldAControllerRecoveryHelp"/>
+        <Condition ID="WouldAPlannerRecoveryHelp"/>
+        <Condition ID="WouldASmootherRecoveryHelp"/>
+        <Action ID="call_fms"/>
+        <Action ID="call_picker"/>
+        <Condition ID="check_gripper_open_close"/>
+        <Action ID="collision_monitor_activate"/>
+        <Action ID="collision_monitor_deactivation"/>
+        <Action ID="cy_frame_seg_param_set"/>
+        <Action ID="execute_cy_cluster_vector"/>
+        <Action ID="find_cy_clusters"/>
+        <Action ID="find_mid_point"/>
+        <Action ID="go_mid_point"/>
+        <Action ID="go_to_Drop_pose"/>
+        <Action ID="go_to_pick_point"/>
+        <Action ID="go_to_pre_point"/>
+        <Action ID="goal_point_xy_accuracy_increase"/>
+        <Action ID="open_gripper"/>
+        <Action ID="pick_cylinder"/>
+        <Action ID="precision_landing"/>
+        <Action ID="resverse_false"/>
+        <Action ID="reverse_active"/>
+        <Action ID="speed_set"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
