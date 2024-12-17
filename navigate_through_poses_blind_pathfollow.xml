@@ -1,0 +1,10 @@
+<!-- only follow the generated path -->
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="BasicPathFollowing">
+      <RemovePassedGoals input_goals="{goals}" output_goals="{goals}" radius="1.5"/>
+      <ComputePathThroughPoses goals="{goals}" path="{path}" planner_id="GridBased" server_timeout="200"/>
+      <FollowPath path="{path}" controller_id="FollowPath"/>
+    </Sequence>
+  </BehaviorTree>
+</root>
